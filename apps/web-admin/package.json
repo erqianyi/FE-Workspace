@@ -1,5 +1,5 @@
 {
-  "name": "web-admin",
+  "name": "@vben/web-admin",
   "version": "1.0.0",
   "homepage": "",
   "bugs": "",
@@ -35,12 +35,10 @@
     "@vben/types": "workspace:*",
     "@vben/utils": "workspace:*",
     "@vueuse/core": "catalog:",
-    "element-plus": "catalog:",
+    "antdv-next": "catalog:",
+    "dayjs": "catalog:",
     "pinia": "catalog:",
     "vue": "catalog:",
     "vue-router": "catalog:"
-  },
-  "devDependencies": {
-    "unplugin-element-plus": "catalog:"
   }
 }

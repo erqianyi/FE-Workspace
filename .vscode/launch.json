@@ -4,9 +4,18 @@
   "configurations": [
     {
       "type": "chrome",
-      "name": "vben admin ele dev",
+      "name": "web system dev",
       "request": "launch",
-      "url": "http://localhost:5777",
+      "url": "http://localhost:5555",
+      "env": { "NODE_ENV": "development" },
+      "sourceMaps": true,
+      "webRoot": "${workspaceFolder}/apps/web-system"
+    },
+    {
+      "type": "chrome",
+      "name": "web admin dev",
+      "request": "launch",
+      "url": "http://localhost:5999",
       "env": { "NODE_ENV": "development" },
       "sourceMaps": true,
       "webRoot": "${workspaceFolder}/apps/web-admin"

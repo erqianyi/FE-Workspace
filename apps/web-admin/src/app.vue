@@ -1,17 +1,50 @@
 <script lang="ts" setup>
-import { useElementPlusDesignTokens } from '@vben/hooks';
+import { computed, watch } from 'vue';
 
-import { ElConfigProvider } from 'element-plus';
+import { useAntdDesignTokens } from '@vben/hooks';
+import { preferences, usePreferences } from '@vben/preferences';
 
-import { elementLocale } from '#/locales';
+import { App, ConfigProvider, StyleProvider, theme } from 'antdv-next';
+
+import { antdLocale } from '#/locales';
 
 defineOptions({ name: 'App' });
 
-useElementPlusDesignTokens();
+const { isDark } = usePreferences();
+const { tokens } = useAntdDesignTokens();
+
+const tokenTheme = computed(() => {
+  const algorithm = isDark.value
+    ? [theme.darkAlgorithm]
+    : [theme.defaultAlgorithm];
+
+  // antd 紧凑模式算法
+  if (preferences.app.compact) {
+    algorithm.push(theme.compactAlgorithm);
+  }
+
+  return {
+    algorithm,
+    token: tokens,
+  };
+});
+
+watch(
+  [tokenTheme, antdLocale],
+  ([themeConfig, locale]) => {
+    ConfigProvider.config({ theme: themeConfig, locale });
+  },
+  { immediate: true },
+);
 </script>
 
 <template>
-  <ElConfigProvider :locale="elementLocale">
-    <RouterView />
-  </ElConfigProvider>
+  <!-- layer: antd 组件样式注入 @layer antd，让 Tailwind 工具类可以覆盖组件样式 -->
+  <StyleProvider layer>
+    <ConfigProvider :locale="antdLocale" :theme="tokenTheme">
+      <App>
+        <RouterView />
+      </App>
+    </ConfigProvider>
+  </StyleProvider>
 </template>

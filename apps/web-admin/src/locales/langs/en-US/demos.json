@@ -1,11 +1,10 @@
 {
   "title": "Demos",
-  "elementPlus": "Element Plus",
-  "form": "Form",
+  "antd": "Antdv Next",
   "vben": {
     "title": "Project",
     "about": "About",
     "document": "Document",
-    "element-plus": "Element Plus Version"
+    "antdv-next": "Antdv Next Version"
   }
 }

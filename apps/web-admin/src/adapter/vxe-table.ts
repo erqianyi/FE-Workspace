@@ -10,7 +10,7 @@ import {
   useVbenVxeGrid as useGrid,
 } from '@vben/plugins/vxe-table';
 
-import { ElButton, ElImage } from 'element-plus';
+import { Button, Image } from 'antdv-next';
 
 import { useVbenForm } from './form';
 
@@ -49,8 +49,7 @@ setupVbenVxeTable({
       renderTableDefault(renderOpts, params) {
         const { props } = renderOpts;
         const { column, row } = params;
-        const src = row[column.field];
-        return h(ElImage, { src, previewSrcList: [src], ...props });
+        return h(Image, { src: row[column.field], ...props });
       },
     });
 
@@ -59,8 +58,8 @@ setupVbenVxeTable({
       renderTableDefault(renderOpts) {
         const { props } = renderOpts;
         return h(
-          ElButton,
-          { size: 'small', link: true },
+          Button,
+          { size: 'small', type: 'link' },
           { default: () => props?.text },
         );
       },

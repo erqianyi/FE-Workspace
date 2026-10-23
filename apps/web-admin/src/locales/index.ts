@@ -1,4 +1,4 @@
-import type { Language } from 'element-plus/es/locale';
+import type { Locale } from 'antdv-next/dist/locale/index';
 
 import type { App } from 'vue';
 
@@ -13,10 +13,11 @@ import {
 } from '@vben/locales';
 import { preferences } from '@vben/preferences';
 
-import enLocale from 'element-plus/es/locale/lang/en';
-import defaultLocale from 'element-plus/es/locale/lang/zh-cn';
+import antdEnLocale from 'antdv-next/dist/locale/en_US';
+import antdDefaultLocale from 'antdv-next/dist/locale/zh_CN';
+import dayjs from 'dayjs';
 
-const elementLocale = ref<Language>(defaultLocale);
+const antdLocale = ref<Locale>(antdDefaultLocale);
 
 const modules = import.meta.glob('./langs/**/*.json');
 
@@ -42,48 +43,48 @@ async function loadMessages(lang: SupportedLanguagesType) {
  * @param lang
  */
 async function loadThirdPartyMessage(lang: SupportedLanguagesType) {
-  await Promise.all([loadElementLocale(lang)]);
+  await Promise.all([loadAntdLocale(lang), loadDayjsLocale(lang)]);
 }
 
 /**
  * 加载dayjs的语言包
  * @param lang
  */
-// async function loadDayjsLocale(lang: SupportedLanguagesType) {
-//   let locale;
-//   switch (lang) {
-//     case 'en-US': {
-//       locale = await import('dayjs/locale/en');
-//       break;
-//     }
-//     case 'zh-CN': {
-//       locale = await import('dayjs/locale/zh-cn');
-//       break;
-//     }
-//     // 默认使用英语
-//     default: {
-//       locale = await import('dayjs/locale/en');
-//     }
-//   }
-//   if (locale) {
-//     dayjs.locale(locale);
-//   } else {
-//     console.error(`Failed to load dayjs locale for ${lang}`);
-//   }
-// }
-
-/**
- * 加载element-plus的语言包
- * @param lang
- */
-async function loadElementLocale(lang: SupportedLanguagesType) {
+async function loadDayjsLocale(lang: SupportedLanguagesType) {
+  let locale;
   switch (lang) {
     case 'en-US': {
-      elementLocale.value = enLocale;
+      locale = await import('dayjs/locale/en');
       break;
     }
     case 'zh-CN': {
-      elementLocale.value = defaultLocale;
+      locale = await import('dayjs/locale/zh-cn');
+      break;
+    }
+    // 默认使用英语
+    default: {
+      locale = await import('dayjs/locale/en');
+    }
+  }
+  if (locale) {
+    dayjs.locale(locale);
+  } else {
+    console.error(`Failed to load dayjs locale for ${lang}`);
+  }
+}
+
+/**
+ * 加载antd的语言包
+ * @param lang
+ */
+async function loadAntdLocale(lang: SupportedLanguagesType) {
+  switch (lang) {
+    case 'en-US': {
+      antdLocale.value = antdEnLocale;
+      break;
+    }
+    case 'zh-CN': {
+      antdLocale.value = antdDefaultLocale;
       break;
     }
   }
@@ -98,4 +99,4 @@ async function setupI18n(app: App, options: LocaleSetupOptions = {}) {
   });
 }
 
-export { $t, elementLocale, setupI18n };
+export { $t, antdLocale, setupI18n };

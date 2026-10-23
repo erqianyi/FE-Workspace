@@ -21,7 +21,6 @@ const routes: RouteRecordRaw[] = [
         path: 'document',
         component: IFrameView,
         meta: {
-          badgeType: 'dot',
           icon: 'lucide:book-open-text',
           link: VBEN_DOC_URL,
           title: $t('demos.vben.document'),

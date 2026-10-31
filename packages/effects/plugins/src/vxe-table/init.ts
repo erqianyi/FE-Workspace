@@ -21,8 +21,9 @@ import {
   VxeUI,
   VxeUpload,
 } from 'vxe-pc-ui';
-import enUS from 'vxe-pc-ui/lib/language/en-US'; // 导入默认的语言
-import zhCN from 'vxe-pc-ui/lib/language/zh-CN';
+// es 目录下带类型声明，lib 目录在 4.20+ 已不再提供 language 的 .d.ts
+import enUS from 'vxe-pc-ui/es/language/en-US';
+import zhCN from 'vxe-pc-ui/es/language/zh-CN';
 import {
   VxeColgroup,
   VxeColumn,

@@ -11,5 +11,15 @@
     "title": "Dashboard",
     "analytics": "Analytics",
     "workspace": "Workspace"
+  },
+  "portal": {
+    "title": "Portal",
+    "dashboard": "Open Dashboard",
+    "about": "About",
+    "manual": "User Manual",
+    "news": "News",
+    "events": "Events",
+    "services": "Services",
+    "more": "View more"
   }
 }

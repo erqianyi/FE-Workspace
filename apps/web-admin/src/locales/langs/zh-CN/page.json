@@ -11,5 +11,15 @@
     "title": "概览",
     "analytics": "分析页",
     "workspace": "工作台"
+  },
+  "portal": {
+    "title": "门户",
+    "dashboard": "进入工作台",
+    "about": "关于",
+    "manual": "用户手册",
+    "news": "新闻动态",
+    "events": "活动",
+    "services": "服务入口",
+    "more": "查看更多"
   }
 }

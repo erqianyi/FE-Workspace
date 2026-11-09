@@ -31,3 +31,4 @@
 ## 新增
 
 1. `apps/web-system/`，规划是系统管理、权限管理等，目前将原`playground`中的系统管理模块（views、routers、api、locales）示例迁移到该项目。
+2. `apps/web-admin/`项目新增portal门户页模块

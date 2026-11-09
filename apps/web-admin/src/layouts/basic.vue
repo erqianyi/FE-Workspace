@@ -130,6 +130,10 @@ async function handleLogout() {
   await authStore.logout(false);
 }
 
+function handleClickLogo() {
+  router.push('/portal');
+}
+
 function handleNoticeClear() {
   notifications.value = [];
 }
@@ -221,6 +225,7 @@ watch(
     :avatar
     :text="userStore.userInfo?.realName"
     @clear-preferences-and-logout="handleLogout"
+    @click-logo="handleClickLogo"
     @logout="handleLogout"
   >
     <template #user-dropdown>

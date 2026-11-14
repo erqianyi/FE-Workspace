@@ -1,0 +1,26 @@
+{
+  "name": "@vben/web-admin-transport",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "pnpm vite build --mode production",
+    "build:analyze": "pnpm vite build --mode analyze",
+    "dev": "pnpm vite --mode development",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit --skipLibCheck"
+  },
+  "dependencies": {
+    "@fe-workspace/shell": "workspace:*",
+    "@modules/transport": "workspace:*",
+    "@vben/preferences": "workspace:*",
+    "@vben/types": "workspace:*"
+  },
+  "devDependencies": {
+    "@vben/tsconfig": "workspace:*",
+    "@vben/vite-config": "workspace:*",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vue-tsc": "catalog:"
+  }
+}

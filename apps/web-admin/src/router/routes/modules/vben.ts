@@ -2,7 +2,8 @@ import type { RouteRecordRaw } from 'vue-router';
 
 import { VBEN_DOC_URL, VBEN_LOGO_URL } from '@vben/constants';
 
-import { IFrameView } from '#/layouts';
+import { IFrameView } from '@fe-workspace/shell/layouts';
+
 import { $t } from '#/locales';
 
 const routes: RouteRecordRaw[] = [
@@ -31,7 +32,7 @@ const routes: RouteRecordRaw[] = [
   {
     name: 'VbenAbout',
     path: '/vben-admin/about',
-    component: () => import('#/views/_core/about/index.vue'),
+    component: () => import('@fe-workspace/shell/views/_core/about/index.vue'),
     meta: {
       icon: 'lucide:copyright',
       title: $t('demos.vben.about'),
@@ -41,7 +42,8 @@ const routes: RouteRecordRaw[] = [
   {
     name: 'Profile',
     path: '/profile',
-    component: () => import('#/views/_core/profile/index.vue'),
+    component: () =>
+      import('@fe-workspace/shell/views/_core/profile/index.vue'),
     meta: {
       icon: 'lucide:user',
       hideInMenu: true,

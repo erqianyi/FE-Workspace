@@ -6,6 +6,7 @@ import { defineComponent, watch } from 'vue';
 
 import { usePreferences } from '@vben/preferences';
 
+import { VxeUI } from '@vxe-ui/core';
 import {
   VxeButton,
   VxeCheckbox,
@@ -18,7 +19,6 @@ import {
   VxeRadioGroup,
   VxeSelect,
   VxeTooltip,
-  VxeUI,
   VxeUpload,
 } from 'vxe-pc-ui';
 // es 目录下带类型声明，lib 目录在 4.20+ 已不再提供 language 的 .d.ts
@@ -34,6 +34,11 @@ import {
 
 import { injectPluginsOptions } from '../plugins-context';
 import { extendsDefaultFormatter } from './extends'; // 是否加载过
+
+// 按需导入插件会改写具名组件导入，跳过包入口副作用。
+// 这里显式加载默认配置，保证 table/toolbar/button 等全局配置存在。
+import 'vxe-pc-ui/es/ui';
+import 'vxe-table/es/ui';
 
 // 是否加载过
 let isInit = false;

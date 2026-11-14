@@ -6,7 +6,8 @@ const routes: RouteRecordRaw[] = [
   {
     name: 'Profile',
     path: '/profile',
-    component: () => import('#/views/_core/profile/index.vue'),
+    component: () =>
+      import('@fe-workspace/shell/views/_core/profile/index.vue'),
     meta: {
       icon: 'lucide:user',
       hideInMenu: true,

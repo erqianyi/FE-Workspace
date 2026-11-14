@@ -20,30 +20,14 @@
     "#/*": "./src/*"
   },
   "dependencies": {
-    "@vben-core/menu-ui": "workspace:*",
-    "@vben/access": "workspace:*",
-    "@vben/common-ui": "workspace:*",
-    "@vben/constants": "workspace:*",
-    "@vben/hooks": "workspace:*",
-    "@vben/icons": "workspace:*",
-    "@vben/layouts": "workspace:*",
+    "@fe-workspace/shell": "workspace:*",
+    "@modules/system": "workspace:*",
     "@vben/locales": "workspace:*",
-    "@vben/plugins": "workspace:*",
     "@vben/preferences": "workspace:*",
-    "@vben/request": "workspace:*",
-    "@vben/stores": "workspace:*",
-    "@vben/styles": "workspace:*",
     "@vben/types": "workspace:*",
     "@vben/utils": "workspace:*",
-    "@vueuse/core": "catalog:",
-    "antdv-next": "catalog:",
-    "dayjs": "catalog:",
-    "json-bigint": "catalog:",
     "pinia": "catalog:",
     "vue": "catalog:",
     "vue-router": "catalog:"
-  },
-  "devDependencies": {
-    "@types/json-bigint": "catalog:"
   }
 }

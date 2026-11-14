@@ -1,4 +1,1 @@
-export * from './auth';
-export * from './menu';
-export * from './upload';
-export * from './user';
+export * from '@fe-workspace/shell/api/core';

@@ -1,0 +1,39 @@
+{
+  "name": "@modules/system",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "vue-tsc --noEmit --skipLibCheck"
+  },
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./api": {
+      "types": "./src/api/index.ts",
+      "default": "./src/api/index.ts"
+    }
+  },
+  "dependencies": {
+    "@fe-workspace/shell": "workspace:*",
+    "@vben-core/menu-ui": "workspace:*",
+    "@vben/common-ui": "workspace:*",
+    "@vben/icons": "workspace:*",
+    "@vben/locales": "workspace:*",
+    "@vben/plugins": "workspace:*",
+    "@vben/types": "workspace:*",
+    "@vben/utils": "workspace:*",
+    "@vueuse/core": "catalog:",
+    "antdv-next": "catalog:",
+    "dayjs": "catalog:",
+    "vue": "catalog:",
+    "vue-router": "catalog:"
+  },
+  "devDependencies": {
+    "typescript": "catalog:",
+    "vue-tsc": "catalog:"
+  }
+}

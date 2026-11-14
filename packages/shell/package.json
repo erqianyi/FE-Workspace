@@ -1,0 +1,92 @@
+{
+  "name": "@fe-workspace/shell",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "vue-tsc --noEmit --skipLibCheck"
+  },
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./adapter/component": {
+      "types": "./src/adapter/component.ts",
+      "default": "./src/adapter/component.ts"
+    },
+    "./adapter/form": {
+      "types": "./src/adapter/form.ts",
+      "default": "./src/adapter/form.ts"
+    },
+    "./adapter/vxe-table": {
+      "types": "./src/adapter/vxe-table.ts",
+      "default": "./src/adapter/vxe-table.ts"
+    },
+    "./layouts": {
+      "types": "./src/layouts/index.ts",
+      "default": "./src/layouts/index.ts"
+    },
+    "./locales": {
+      "types": "./src/locales.ts",
+      "default": "./src/locales.ts"
+    },
+    "./api": {
+      "types": "./src/api/index.ts",
+      "default": "./src/api/index.ts"
+    },
+    "./api/core": {
+      "types": "./src/api/core/index.ts",
+      "default": "./src/api/core/index.ts"
+    },
+    "./api/request": {
+      "types": "./src/api/request.ts",
+      "default": "./src/api/request.ts"
+    },
+    "./app": {
+      "types": "./src/app.vue",
+      "default": "./src/app.vue"
+    },
+    "./store": {
+      "types": "./src/store/auth.ts",
+      "default": "./src/store/auth.ts"
+    },
+    "./views/*": {
+      "types": "./src/views/*",
+      "default": "./src/views/*"
+    },
+    "./utils/date-range-codec": {
+      "types": "./src/utils/date-range-codec.ts",
+      "default": "./src/utils/date-range-codec.ts"
+    }
+  },
+  "dependencies": {
+    "@vben/access": "workspace:*",
+    "@vben/common-ui": "workspace:*",
+    "@vben/constants": "workspace:*",
+    "@vben/hooks": "workspace:*",
+    "@vben/icons": "workspace:*",
+    "@vben/layouts": "workspace:*",
+    "@vben/locales": "workspace:*",
+    "@vben/plugins": "workspace:*",
+    "@vben/preferences": "workspace:*",
+    "@vben/request": "workspace:*",
+    "@vben/stores": "workspace:*",
+    "@vben/styles": "workspace:*",
+    "@vben/types": "workspace:*",
+    "@vben/utils": "workspace:*",
+    "@vueuse/core": "catalog:",
+    "antdv-next": "catalog:",
+    "dayjs": "catalog:",
+    "json-bigint": "catalog:",
+    "pinia": "catalog:",
+    "vue": "catalog:",
+    "vue-router": "catalog:"
+  },
+  "devDependencies": {
+    "@types/json-bigint": "catalog:",
+    "typescript": "catalog:",
+    "vue-tsc": "catalog:"
+  }
+}

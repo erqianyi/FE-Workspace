@@ -57,6 +57,11 @@ interface RouteMeta {
    */
   fullPathKey?: boolean;
   /**
+   * 后端/混合权限模式使用的页面组件标识。
+   * 模块路由会根据该标识和 component 自动生成页面映射。
+   */
+  componentPath?: string;
+  /**
    * 当前路由的子级在菜单中不展现
    * @default false
    */

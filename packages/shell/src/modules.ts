@@ -7,7 +7,6 @@ import type { ComponentRecordType } from '@vben/types';
 export interface AdminModule {
   name: string;
   routes?: RouteRecordRaw[];
-  componentMap?: ComponentRecordType;
   locales?: Record<SupportedLanguagesType, Record<string, unknown>>;
   install?: (app: App) => Promise<void> | void;
 }
@@ -77,6 +76,57 @@ function assertUniqueNamespaces(
   }
 }
 
+function getRouteLabel(route: RouteRecordRaw) {
+  return route.name ? `route "${String(route.name)}"` : `path "${route.path}"`;
+}
+
+/**
+ * 从模块路由生成页面组件映射。
+ *
+ * meta.componentPath 是后端/混合权限模式的页面标识，route.component 是前端路由
+ * 使用的懒加载组件。两者必须声明在同一条路由上，避免手工维护两份数据源。
+ */
+export function createModuleComponentMap(
+  routes: RouteRecordRaw[],
+): ComponentRecordType {
+  const componentMap: ComponentRecordType = {};
+
+  function visit(route: RouteRecordRaw) {
+    const componentPath = route.meta?.componentPath;
+    const component = route.component;
+
+    if (!componentPath) {
+      if (component) {
+        throw new Error(
+          `${getRouteLabel(route)} requires meta.componentPath when component is defined.`,
+        );
+      }
+    } else if (!component) {
+      throw new Error(
+        `${getRouteLabel(route)} requires component when meta.componentPath is defined.`,
+      );
+    } else if (typeof component !== 'function') {
+      throw new TypeError(
+        `${getRouteLabel(route)} requires a lazy component loader for meta.componentPath.`,
+      );
+    } else if (componentPath in componentMap) {
+      throw new Error(`Duplicate component path: ${componentPath}`);
+    } else {
+      componentMap[componentPath] = component as ComponentRecordType[string];
+    }
+
+    for (const child of route.children ?? []) {
+      visit(child);
+    }
+  }
+
+  for (const route of routes) {
+    visit(route);
+  }
+
+  return componentMap;
+}
+
 export function mergeModuleRoutes(modules: AdminModule[]): RouteRecordRaw[] {
   assertUniqueValues(
     modules.map((module) => module.name),
@@ -99,7 +149,8 @@ export function mergeModuleComponentMaps(
 ): ComponentRecordType {
   const merged: ComponentRecordType = {};
   for (const module of modules) {
-    for (const [key, value] of Object.entries(module.componentMap ?? {})) {
+    const moduleComponentMap = createModuleComponentMap(module.routes ?? []);
+    for (const [key, value] of Object.entries(moduleComponentMap)) {
       if (key in merged) {
         throw new Error(
           `Component key "${key}" is already registered by module "${module.name}".`,

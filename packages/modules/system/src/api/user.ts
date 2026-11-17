@@ -1,8 +1,12 @@
-import type { Recordable } from '@vben/types';
+import type { SystemListParams, SystemPageResult } from './types';
 
 import { requestClient } from '@fe-workspace/shell/api/request';
 
 export namespace SystemUserApi {
+  export interface ListParams extends SystemListParams {
+    deptId?: string;
+  }
+
   export interface SystemUser {
     [key: string]: any;
     id: string;
@@ -16,8 +20,8 @@ export namespace SystemUserApi {
 /**
  * 获取用户列表数据
  */
-async function getUserList(params: Recordable<any>) {
-  return requestClient.get<Array<SystemUserApi.SystemUser>>(
+async function getUserList(params: SystemUserApi.ListParams) {
+  return requestClient.get<SystemPageResult<SystemUserApi.SystemUser>>(
     '/system/user/list',
     { params },
   );

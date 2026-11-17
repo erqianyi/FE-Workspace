@@ -16,6 +16,7 @@ const routes: RouteRecordRaw[] = [
         path: 'user',
         name: 'SystemUser',
         meta: {
+          componentPath: '/system/user/list.vue',
           icon: 'mdi:user',
           title: $t('system.user.title'),
         },
@@ -25,6 +26,7 @@ const routes: RouteRecordRaw[] = [
         path: 'role',
         name: 'SystemRole',
         meta: {
+          componentPath: '/system/role/list.vue',
           icon: 'mdi:account-group',
           title: $t('system.role.title'),
         },
@@ -34,6 +36,7 @@ const routes: RouteRecordRaw[] = [
         path: 'menu',
         name: 'SystemMenu',
         meta: {
+          componentPath: '/system/menu/list.vue',
           icon: 'mdi:menu',
           title: $t('system.menu.title'),
         },
@@ -43,6 +46,7 @@ const routes: RouteRecordRaw[] = [
         path: 'dept',
         name: 'SystemDept',
         meta: {
+          componentPath: '/system/dept/list.vue',
           icon: 'charm:organisation',
           title: $t('system.dept.title'),
         },

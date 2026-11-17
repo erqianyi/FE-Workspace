@@ -1,5 +1,3 @@
-import type { ComponentRecordType } from '@vben/types';
-
 import { describe, expect, it } from 'vitest';
 
 import {
@@ -57,6 +55,7 @@ describe('admin modules', () => {
         routes: [
           {
             children: [{ children: [], name: 'OrderList', path: 'list' }],
+            meta: { title: 'Order' },
             name: 'Order',
             path: '/order',
           },
@@ -67,6 +66,7 @@ describe('admin modules', () => {
         routes: [
           {
             children: [{ children: [], name: 'OrderList', path: 'list' }],
+            meta: { title: 'Transport' },
             name: 'Transport',
             path: '/transport',
           },
@@ -77,15 +77,44 @@ describe('admin modules', () => {
     expect(() => mergeModuleRoutes(modules)).toThrow('Duplicate route name');
   });
 
-  it('merges component maps and rejects duplicate keys', () => {
-    const componentMap: ComponentRecordType = {
-      '/order/list.vue': loadComponent,
-    };
+  it('derives component maps from module routes', () => {
     const modules = [
-      defineAdminModule({ name: 'order', componentMap }),
+      defineAdminModule({
+        name: 'order',
+        routes: [
+          {
+            children: [
+              {
+                component: loadComponent,
+                meta: { componentPath: '/order/list.vue', title: 'Order list' },
+                name: 'OrderList',
+                path: 'list',
+              },
+            ],
+            name: 'Order',
+            path: '/order',
+          },
+        ],
+      }),
       defineAdminModule({
         name: 'transport',
-        componentMap: { '/transport/list.vue': loadComponent },
+        routes: [
+          {
+            children: [
+              {
+                component: loadComponent,
+                meta: {
+                  componentPath: '/transport/list.vue',
+                  title: 'Transport list',
+                },
+                name: 'TransportList',
+                path: 'list',
+              },
+            ],
+            name: 'Transport',
+            path: '/transport',
+          },
+        ],
       }),
     ];
 
@@ -93,13 +122,79 @@ describe('admin modules', () => {
       '/order/list.vue',
       '/transport/list.vue',
     ]);
+  });
+
+  it('rejects duplicate component paths across modules', () => {
+    const createRoutes = () => [
+      {
+        children: [
+          {
+            component: loadComponent,
+            meta: { componentPath: '/order/list.vue', title: 'Order list' },
+            name: 'OrderList',
+            path: 'list',
+          },
+        ],
+        meta: { title: 'Order' },
+        name: 'Order',
+        path: '/order',
+      },
+    ];
 
     expect(() =>
       mergeModuleComponentMaps([
-        ...modules,
-        defineAdminModule({ name: 'order-copy', componentMap }),
+        defineAdminModule({ name: 'order', routes: createRoutes() }),
+        defineAdminModule({ name: 'order-copy', routes: createRoutes() }),
       ]),
     ).toThrow('already registered');
+  });
+
+  it('requires componentPath for module route components', () => {
+    expect(() =>
+      mergeModuleComponentMaps([
+        defineAdminModule({
+          name: 'order',
+          routes: [
+            {
+              children: [
+                { component: loadComponent, name: 'OrderList', path: 'list' },
+              ],
+              meta: { title: 'Order' },
+              name: 'Order',
+              path: '/order',
+            },
+          ],
+        }),
+      ]),
+    ).toThrow('requires meta.componentPath');
+  });
+
+  it('requires a component for componentPath', () => {
+    expect(() =>
+      mergeModuleComponentMaps([
+        defineAdminModule({
+          name: 'order',
+          routes: [
+            {
+              children: [
+                {
+                  meta: {
+                    componentPath: '/order/list.vue',
+                    title: 'Order list',
+                  },
+                  name: 'OrderList',
+                  path: 'list',
+                  redirect: '/order',
+                },
+              ],
+              meta: { title: 'Order' },
+              name: 'Order',
+              path: '/order',
+            },
+          ],
+        }),
+      ]),
+    ).toThrow('requires component');
   });
 
   it('merges module locales by namespace', () => {

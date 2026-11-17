@@ -7,9 +7,6 @@ import { routes } from './routes';
 const moduleTransport = defineAdminModule({
   name: 'transport',
   routes,
-  componentMap: {
-    '/transport/list.vue': () => import('./views/list.vue'),
-  },
   locales: {
     'zh-CN': zhCN,
     'en-US': enUS,

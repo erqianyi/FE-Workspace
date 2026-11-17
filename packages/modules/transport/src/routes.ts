@@ -17,6 +17,7 @@ const routes: RouteRecordRaw[] = [
         path: 'list',
         component: () => import('./views/list.vue'),
         meta: {
+          componentPath: '/transport/list.vue',
           icon: 'lucide:list',
           title: $t('transport.list.title'),
         },

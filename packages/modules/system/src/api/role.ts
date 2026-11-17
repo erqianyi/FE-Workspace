@@ -1,4 +1,4 @@
-import type { Recordable } from '@vben/types';
+import type { SystemListParams, SystemPageResult } from './types';
 
 import { requestClient } from '@fe-workspace/shell/api/request';
 
@@ -16,8 +16,8 @@ export namespace SystemRoleApi {
 /**
  * 获取角色列表数据
  */
-async function getRoleList(params: Recordable<any>) {
-  return requestClient.get<Array<SystemRoleApi.SystemRole>>(
+async function getRoleList(params: SystemListParams) {
+  return requestClient.get<SystemPageResult<SystemRoleApi.SystemRole>>(
     '/system/role/list',
     { params },
   );

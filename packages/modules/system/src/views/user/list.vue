@@ -30,6 +30,10 @@ import Form from './modules/form.vue';
 
 interface UserSearchFormValues extends Record<string, unknown> {
   createTime?: [Dayjs, Dayjs];
+  id?: string;
+  name?: string;
+  remark?: string;
+  status?: 0 | 1;
 }
 
 const userSearchCodec = createDateRangeCodec<UserSearchFormValues>()({
